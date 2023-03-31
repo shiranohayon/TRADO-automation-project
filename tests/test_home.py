@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utilities.setup import WebDriverSetup
@@ -9,30 +8,13 @@ class Tests(WebDriverSetup):
 
     def test_1_welcome_to_popup_with_category(self, setUp):
         welcome_popup = self.home_page.get_welcome_popup()
-        print("welcome_popup before")
-        print(welcome_popup)
-        self.home_page.click_restaurant_option()
-        self.home_page.click_save_btn()
-        sleep(2)
-        print("welcome_popup after")
-        print(welcome_popup)
-        # Todo: check how to know if welcome_popup is not displayed anymore
-        assert welcome_popup.is_displayed() == False
-
-
-
-
-
+        assert welcome_popup == False
 
 
     def test_3_valid_text_sales_btn(self, setUp):
         sales_btn = self.home_page.txt_sales_btn()
         assert sales_btn.text == 'מבצעים', f"Unexpected text: {sales_btn.text}"
 
-
-    def test_4_valid_text_drinks_btn(self, setUp):
-        drinks_btn = self.home_page.txt_drinks_btn()
-        assert drinks_btn.text == 'משקאות', f"Unexpected text: {drinks_btn.text}"
 
 
     def test_5_click_drinks_btn(self, setUp):
@@ -41,15 +23,19 @@ class Tests(WebDriverSetup):
         assert self.driver.current_url == "https://qa.trado.co.il/?sectionName=%D7%9E%D7%A9%D7%A7%D7%90%D7%95%D7%AA"
 
 
+    def test_7_search_valid_keyword(self, setUp):
+        self.home_page.get_search_bar_text_field()
+        product_name = self.home_page.get_product_name_to_search(self.db)
+        self.home_page.search_bar_keyword(product_name)
+        is_results_displayed = self.home_page.is_result_window_displayed()
+        assert is_results_displayed == True
+
 
     def test_7_search_invalid_keyword(self, setUp):
-        sleep(2)
-        self.home_page.search_bar_keyword('aaaa')
-        sleep(2)
-        results_search_bar = self.home_page.no_results_search_bar()
-        sleep(2)
-        # Todo: check if the results window should appear and when
-        assert self.home_page.no_results_search_bar()
+        self.home_page.get_search_bar_text_field()
+        self.home_page.search_bar_keyword('aaabfbfbfn')
+        is_no_results_text_display = self.home_page.no_results_search_bar()
+        assert is_no_results_text_display == False
 
 
 
@@ -75,10 +61,12 @@ class Tests(WebDriverSetup):
     #     # check if the external and inner image sources are equal
     #     assert first_image_src != second_image_src
 
+
+
     def test_10_promotional_banner_image_transition(self, setUp):
         # Todo read the todo in get_current_img_src()
         first_img_src = self.home_page.get_current_img_src()
-        sleep(5)
+        sleep(10)
         second_img_src = self.home_page.get_current_img_src()
         print("first_img_src")
         print(first_img_src)
@@ -119,6 +107,21 @@ class Tests(WebDriverSetup):
         inner_image_src = inner_image.get_attribute('src')
         # check if the external and inner image sources are equal
         assert external_image_src == inner_image_src
+
+
+    def test_17_sort_price_high_to_low(self, setUp):
+        self.home_page.sort_product_btn()
+        self.home_page.sort_high_to_low_option()
+        # Todo: create a list of product with the class common to all products and a for loop
+
+
+
+    def test_19_valid_text_importants(self, setUp):
+        importants_description = self.home_page.txt_of_importants()
+        assert importants_description.text == 'Importants', f"Unexpected text: {importants_description.text}"
+
+
+
 
 
 

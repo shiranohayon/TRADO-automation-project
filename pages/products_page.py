@@ -35,5 +35,16 @@ class ProductsPage:
     def get_barcode(self):
         barcode = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, ProductsLocators.barcode))).text
-        print(barcode)
         return barcode
+
+    def get_product_price(self):
+        price = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, ProductsLocators.product_price))).text
+        return price
+
+
+    def get_product_price_from_db(self, db, barcode):
+        # get the whole product from db by barcode
+        product = get_specific_document(db, "products", "barcode", barcode)
+        price = product.get("price")
+        return price

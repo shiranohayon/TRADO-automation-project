@@ -51,6 +51,24 @@ def display_all_documents_in_a_collection(db, collection_name):
     for document in documents:
         print(document)
 
+def get_random_product(db):
+    product_collecton = db["products"]
+    all_products = product_collecton.find()
+    return all_products[0]
+
+def get_login_code(db, phone):
+    user_collection = db["users"]
+    user = user_collection.find_one({"phone": phone})
+    return user.get("loginCode")
+
+def is_user_in_db(db, phone):
+    user_collection = db["users"]
+    user = user_collection.find_one({"phone": phone})
+    if user:
+        return True
+    else:
+        return False
+
 # Function to get the value of a specific key in a document identified by its ID in a given collection
 # def get_specific_key_value(db, collection_name, document_id, key):
 #     collection = db[collection_name]

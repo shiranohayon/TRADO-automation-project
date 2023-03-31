@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from locators.home_locators import HomeLocators
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+from utilities.db_utils import get_random_product
 
 class HomePage:
 
@@ -12,15 +13,12 @@ class HomePage:
 
 
     def get_welcome_popup(self):
-       return WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, HomeLocators.welcome_to_popup)))
+        welcome_popup = self.driver.find_element(By.XPATH, HomeLocators.welcome_to_popup).is_displayed()
+        return welcome_popup
 
     def wait_welcome_popup_disappear(self):
         WebDriverWait(self.driver, 10).until_not(EC.visibility_of_element_located((By.XPATH, HomeLocators.welcome_to_popup)))
 
-    def get_welcome_popup(self):
-        welcome_popup = self.driver.find_element(By.XPATH, HomeLocators.welcome_to_popup)
-        return welcome_popup
 
     def is_welcome_popup_displayed(self):
         # return self.get_welcome_popup().is_displayed()
@@ -86,8 +84,9 @@ class HomePage:
     def get_current_img_src(self):
         sleep(3)
         # Todo: check why it doesnt find the element by classname
-        current = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, "slide selected")))
+        # current = WebDriverWait(self.driver, 10).until(
+        #     EC.visibility_of_element_located((By.CLASS_NAME, "slide selected")))
+        current = self.driver.find_element(By.CLASS_NAME, "slide selected")
         a = current.find_element(By.TAG_NAME, 'a')
         image = a.find_element(By.TAG_NAME, 'img')
         src = image.get_attribute('src')
@@ -105,24 +104,18 @@ class HomePage:
 
 
 
-
-
     def get_search_bar_text_field(self):
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, HomeLocators.search_bar_text_field)))
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.search_bar_text_field))).click()
 
-    def search_bar_keyword(self, keyword):
-        search_bar_text_field = self.get_search_bar_text_field()
-        search_bar_text_field.click()
-        search_bar_text_field.send_keys(keyword)
-
-
+    def search_bar_keyword(self, input):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.search_bar_text_field))).send_keys(input)
 
 
 
     def no_results_search_bar(self):
-        return WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(By.XPATH, HomeLocators.zero_results_error_search))
+        return self.driver.find_element(By.XPATH, HomeLocators.zero_results_error_search).is_displayed()
 
 
 
@@ -134,8 +127,32 @@ class HomePage:
 
 
 
+    def sort_product_btn(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.sort_btn))).click()
+        sleep(2)
+
+    def sort_high_to_low_option(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.sort_high_to_low))).click()
+        sleep(2)
 
 
+    def txt_of_importants(self):
+      return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.footer_importants_text)))
+
+    def click_connection(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.connection_login_signup_btn))).click()
+
+    def get_product_name_to_search(self, db):
+        product = get_random_product(db)
+        return product.get("name")
+
+    def is_result_window_displayed(self):
+        results = self.driver.find_element(By.CLASS_NAME, "mainSearch_results")
+        return results.is_displayed()
 
 
 

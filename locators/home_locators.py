@@ -13,3 +13,7 @@ class HomeLocators:
     promotional_banner_second_image = '//*[@id="root"]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div[1]/div/div/div/ul/li[5]/a/img'
     banner = '//*[@id="root"]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div[1]/div/div/div/ul/li[8]/a'
     external_product_title = '//*[@id="root"]/div/div[2]/div[1]/div/div/div/div/div/div[3]/a[4]/div/div[2]/div[2]/div[1]'
+    sort_btn = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[3]/div'
+    sort_high_to_low = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[3]/div/select/option[3]'
+    footer_importants_text = '//*[@id="root"]/div/div[2]/div[3]/div/div[1]/h2'
+    connection_login_signup_btn = '//*[@id="root"]/div/div[2]/header/div/div/a[1]/span[1]'

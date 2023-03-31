@@ -1,0 +1,15 @@
+class SignUpLocators:
+    sign_up_btn = '//*[@id="root"]/div/div[4]/div/div/div/div/div[1]/span[2]'
+    signup_phone_input = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[1]/span/input'
+    signup_bnnumber_input = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[2]/span/input'
+    agree_terms_checkbox = '/html/body/div[1]/div/div[4]/div/div/div/div/form/div[1]/div[3]/span/label'
+    create_user_btn = '//*[@id="root"]/div/div[4]/div/div/div/div/form/input'
+    signup_popup = '//*[@id="root"]/div/div[4]/div'
+    login_user_btn = 'form_submitBtn'
+    # square_class_name_prefix = "input_"
+    square1 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[1]/span/input'
+    square2 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[2]/span/input'
+    square3 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[3]/span/input'
+    square4 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[4]/span/input'
+    square5 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[5]/span/input'
+    phone_error_message = 'form_note '

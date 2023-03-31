@@ -4,7 +4,8 @@ from pages.login_page import LoginPage
 # from pages.cart_page import Cartpage
 from pages.home_page import HomePage
 from pages.products_page import ProductsPage
-# from pages.sign_up_page import Sign_Up_Page
+from pages.registration_page import SignUpPage
+from pages.footer_page import FooterPage
 from selenium.webdriver.chrome.service import Service
 # from selenium.webdriver.chrome.options import Options
 from utilities.db_utils import create_mongo_connection
@@ -28,9 +29,10 @@ class WebDriverSetup:
         self.login_page = LoginPage(self.driver)
         # self.cart_page = CartPage(self.driver)
         self.home_page = HomePage(self.driver)
+        self.footer_page = FooterPage(self.driver)
         self.home_page.welcome_popup()
         self.products_page = ProductsPage(self.driver)
-        # self.registration_page = SignUpPage(self.driver)
+        self.registration_page = SignUpPage(self.driver)
         self.db = create_mongo_connection()
         yield self.driver
         self.driver.quit()
