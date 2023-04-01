@@ -20,8 +20,6 @@ class Tests(WebDriverSetup):
 
 
 
-
-
     def test_log_in_without_details(self, setUp):
        self.home_page.click_connection()
        self.login_page.click_login_user()

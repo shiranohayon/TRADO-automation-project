@@ -7,3 +7,6 @@ class FooterLocators:
     content_refferal = '//*[@id="contactForm"]/div[1]/div[5]/textarea'
     send_message_btn = '//*[@id="contactForm"]/input'
     confirmation_txt_message = '//*[@id="contactForm"]/div[3]'
+    facebook_link = "a[href='https://www.facebook.com/'][target='blank']"
+    instagram_link = "a[href='https://www.instagram.com/'][target='blank']"
+    twitter_link = "a[href='https://twitter.com/?lang=he'][target='blank']"

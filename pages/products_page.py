@@ -18,7 +18,7 @@ class ProductsPage:
 
     def inner_txt_product_btn(self):
         return WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, ProductsLocators.inner_product_title)))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, ProductsLocators.inner_product_title)))
 
     def get_units_amount(self):
         return WebDriverWait(self.driver, 10).until(

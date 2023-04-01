@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from utilities.setup import WebDriverSetup
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-from utilities.db_utils import is_user_in_db
+from utilities.db_utils import is_user_in_db, count_users_by_phone_number
 
 
 class Tests(WebDriverSetup):
@@ -37,8 +37,8 @@ class Tests(WebDriverSetup):
         self.registration_page.click_terms_checkbox()
         self.registration_page.click_create_user_btn()
         phone_error_message = self.registration_page.get_invalid_phone_error_message()
-        assert phone_error_message.text == 'מס׳ טלפון לא תקין', \
-            f"Unexpected text: {phone_error_message.text}"
+        is_user_created = is_user_in_db(self.db, phone)
+        assert phone_error_message.text == 'מס׳ טלפון לא תקין' and is_user_created == False
 
 
     def test_sign_up_with_invalid_bnnumber_over_9_char(self, setUp):
@@ -54,14 +54,6 @@ class Tests(WebDriverSetup):
        # Todo: ask israel what is the ifyun and which assert i need
 
 
-
-
-
-
-
-
-
-
     def test_sign_up_with_exists_user(self, setUp):
         phone = '0525918555'
         self.home_page.click_connection()
@@ -72,16 +64,9 @@ class Tests(WebDriverSetup):
         self.registration_page.sign_up_bnnumber_input('1234')
         self.registration_page.click_terms_checkbox()
         self.registration_page.click_create_user_btn()
-        login_code = self.registration_page.get_login_code_from_db(self.db, phone)
-        self.registration_page.fill_signup_code_in_squares(login_code)
-        self.registration_page.click_signup_user()
-        is_user_created = is_user_in_db(self.db, phone)
-    # Todo: assert user not created more than once and assert error message
-
-    # assert "Phone number already exists" in error_msg
-    #
-    # users = get_users_by_phone_number(self.db, phone)
-    # assert len(users) == 1
+        exist_user_error_msg_text = self.registration_page.error_message_exist_user()
+        count_users = count_users_by_phone_number(self.db, phone)
+        assert count_users == 1 and exist_user_error_msg_text == 'שדה צריך להיות ייחודיי'
 
     def test_sign_up_without_details(self, setUp):
         self.home_page.click_connection()

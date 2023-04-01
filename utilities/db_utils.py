@@ -69,6 +69,10 @@ def is_user_in_db(db, phone):
     else:
         return False
 
+def count_users_by_phone_number(db, phone):
+    users_count = db.users.count_documents({"phone": phone})
+    return users_count
+
 # Function to get the value of a specific key in a document identified by its ID in a given collection
 # def get_specific_key_value(db, collection_name, document_id, key):
 #     collection = db[collection_name]

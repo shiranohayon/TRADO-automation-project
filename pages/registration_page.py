@@ -62,6 +62,10 @@ class SignUpPage:
         return WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, SignUpLocators.phone_error_message)))
 
+    def error_message_exist_user(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, SignUpLocators.exist_user_message))).text
+
 
     def input_square1(self, number):
         WebDriverWait(self.driver, 10).until(

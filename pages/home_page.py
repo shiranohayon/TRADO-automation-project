@@ -82,11 +82,7 @@ class HomePage:
             EC.visibility_of_element_located((By.XPATH, HomeLocators.banner)))
 
     def get_current_img_src(self):
-        sleep(3)
-        # Todo: check why it doesnt find the element by classname
-        # current = WebDriverWait(self.driver, 10).until(
-        #     EC.visibility_of_element_located((By.CLASS_NAME, "slide selected")))
-        current = self.driver.find_element(By.CLASS_NAME, "slide selected")
+        current = self.driver.find_element(By.CSS_SELECTOR, ".slide.selected")
         a = current.find_element(By.TAG_NAME, 'a')
         image = a.find_element(By.TAG_NAME, 'img')
         src = image.get_attribute('src')
@@ -98,19 +94,25 @@ class HomePage:
             EC.visibility_of_element_located((By.XPATH, HomeLocators.drinks_btn)))
 
     def external_txt_product_btn(self):
-        return WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, HomeLocators.external_product_title)))
-        sleep(3)
+        sleep(4)
+        link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/product/56586']")
+        # Find the <div> element with class "productDesc_name" inside the <a> element
+        div = link.find_element(By.CSS_SELECTOR, "div.productDesc_name")
+        return div
+
+
+    # def external_product_image(self):
 
 
 
-    def get_search_bar_text_field(self):
+
+    def click_search_bar_text_field(self):
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, HomeLocators.search_bar_text_field))).click()
+            EC.visibility_of_element_located((By.CSS_SELECTOR, HomeLocators.search_bar_text_field))).click()
 
     def search_bar_keyword(self, input):
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, HomeLocators.search_bar_text_field))).send_keys(input)
+            EC.visibility_of_element_located((By.CSS_SELECTOR, HomeLocators.search_bar_text_field))).send_keys(input)
 
 
 
@@ -137,6 +139,11 @@ class HomePage:
             EC.visibility_of_element_located((By.XPATH, HomeLocators.sort_high_to_low))).click()
         sleep(2)
 
+    def sort_low_to_high_option(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, HomeLocators.sort_low_to_high))).click()
+        sleep(2)
+
 
     def txt_of_importants(self):
       return WebDriverWait(self.driver, 10).until(
@@ -153,6 +160,28 @@ class HomePage:
     def is_result_window_displayed(self):
         results = self.driver.find_element(By.CLASS_NAME, "mainSearch_results")
         return results.is_displayed()
+
+    def get_all_products_prices(self):
+        prices = []
+        prices_list = self.driver.find_elements(By.CSS_SELECTOR, ".productPrice_price")
+        for product_price in prices_list:
+            price = product_price.text
+            price = price.replace("₪", "")
+            price = float(price)
+            prices.append(price)
+        return prices
+
+    def is_sorted_high_to_low(self, lst):
+        for i in range(1, len(lst)):
+            if lst[i] > lst[i - 1]:
+                return False
+        return True
+
+    def is_sorted_low_to_high(self, lst):
+        for i in range(1, len(lst)):
+            if lst[i] < lst[i - 1]:
+                return False
+        return True
 
 
 

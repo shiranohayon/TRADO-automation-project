@@ -1,3 +1,5 @@
+import random
+import string
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -33,6 +35,17 @@ class FooterPage:
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, FooterLocators.content_refferal))).send_keys(text)
 
+    def get_text_content_refferal_contact_us(self):
+       return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, FooterLocators.content_refferal))).get_attribute("value")
+
+    def forloop_invalid_content_refferal(self):
+        str = ""
+        for i in range(101):
+            random_letters = random.choice(string.ascii_letters)
+            str = str + random_letters
+        return str
+
     def click_send_message_contact_us(self):
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, FooterLocators.send_message_btn))).click()
@@ -40,4 +53,18 @@ class FooterPage:
     def get_confirmation_txt_contact_us(self):
        return WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, FooterLocators.confirmation_txt_message)))
+
+
+    def click_facebook_link(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, FooterLocators.facebook_link))).click()
+
+    def click_instagram_link(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, FooterLocators.instagram_link))).click()
+
+    def click_twitter_link(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, FooterLocators.twitter_link))).click()
+
 
