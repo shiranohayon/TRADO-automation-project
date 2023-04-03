@@ -32,8 +32,7 @@ class SignUpPage:
 
 
     def sign_up_bnnumber_input(self, bnnumber):
-        WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, SignUpLocators.signup_bnnumber_input))).send_keys(bnnumber)
+        self.driver.find_element(By.XPATH, SignUpLocators.signup_bnnumber_input).send_keys(bnnumber)
         sleep(2)
 
 
@@ -61,6 +60,10 @@ class SignUpPage:
     def get_invalid_phone_error_message(self):
         return WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, SignUpLocators.phone_error_message)))
+
+    def get_approve_policy_error_message(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, SignUpLocators.policy_error_message)))
 
     def error_message_exist_user(self):
         return WebDriverWait(self.driver, 10).until(

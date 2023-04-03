@@ -36,6 +36,13 @@ class LoginPage:
         self.click_login_user()
         sleep(2)
 
+
+    def invalid_login_process(self):
+        phone = '000'
+        HomePage.click_connection(self)
+        self.login_phone_input(phone)
+        self.click_login_user()
+
     def get_connection_btn(self):
        return WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, HomeLocators.connection_login_signup_btn))).is_displayed()
@@ -60,13 +67,8 @@ class LoginPage:
             EC.invisibility_of_element_located((By.CLASS_NAME, LoginLocators.login_popup)))
 
     def get_empty_phone_error_message(self):
-        # error_div = WebDriverWait(self.driver, 10).until(
-        #     EC.visibility_of_element_located((By.XPATH, LoginLocators.empty_phone_error_message)))
         error_div = self.driver.find_element(By.XPATH, LoginLocators.empty_phone_error_message)
-
         return error_div.text
-
-
 
 
     # def fill_login_code_in_squares(self, logincode):
@@ -85,6 +87,14 @@ class LoginPage:
 
     def get_logout_btn(self):
         return self.driver.find_element(By.CLASS_NAME,LoginLocators.log_out_btn)
+
+
+    def get_facebook_logo(self):
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, LoginLocators.facebook_logo))).is_displayed()
+    def get_google_logo(self):
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, LoginLocators.google_logo))).is_displayed()
+    def get_twitter_logo(self):
+        return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, LoginLocators.twitter_logo))).is_displayed()
 
 
 

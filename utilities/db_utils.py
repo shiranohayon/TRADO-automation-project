@@ -69,6 +69,46 @@ def is_user_in_db(db, phone):
     else:
         return False
 
+def get_user_details(db, phone):
+    user_collection = db["users"]
+    user = user_collection.find_one({"phone": phone})
+    if user:
+        return user
+    else:
+        return None
+
+def get_user_first_name(db, phone):
+    user = get_user_details(db, phone)
+    return user.get("firstName")
+
+def get_user_last_name(db, phone):
+    user = get_user_details(db, phone)
+    return user.get("lastName")
+
+def get_user_city(db, phone):
+    user = get_user_details(db, phone)
+    address = user.get("address")
+    city = address.get("city")
+    return city
+
+def get_user_home_number(db, phone):
+    user = get_user_details(db, phone)
+    address = user.get("address")
+    building = address.get("building")
+    return building
+
+
+    # db is the connection object to mongo
+def is_product_in_db(db, barcode):
+    product_collection = db["products"]
+    product = product_collection.find_one({"barcode": barcode})
+    if product:
+        return True
+    else:
+        return False
+
+
+
 def count_users_by_phone_number(db, phone):
     users_count = db.users.count_documents({"phone": phone})
     return users_count

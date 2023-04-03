@@ -7,3 +7,6 @@ class LoginLocators:
     close_connection_popup = '//*[@id="root"]/div/div[4]/div/span/i '
     login_popup = 'modal_modal modal_login_modal login_modal'
     empty_phone_error_message = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[1]/div'
+    facebook_logo = "button.login_facebook.metro"
+    google_logo = "button.login_google"
+    twitter_logo = "div.login_twitter"

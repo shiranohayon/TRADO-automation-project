@@ -14,3 +14,4 @@ class SignUpLocators:
     square5 = '//*[@id="root"]/div/div[4]/div/div/div/div/form/div[1]/div[5]/span/input'
     phone_error_message = 'form_note '
     exist_user_message = '.form_message'
+    policy_error_message = '.form_message'

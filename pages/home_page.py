@@ -96,15 +96,26 @@ class HomePage:
     def external_txt_product_btn(self):
         sleep(4)
         link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/product/56586']")
-        # Find the <div> element with class "productDesc_name" inside the <a> element
+        # Find the div element with class "productDesc_name" inside the <a> element
         div = link.find_element(By.CSS_SELECTOR, "div.productDesc_name")
         return div
 
 
-    # def external_product_image(self):
+    def external_product_image(self):
+        all_images = self.driver.find_elements(By.CSS_SELECTOR, HomeLocators.external_product_image)
+        first_image = all_images[0]
+        src = first_image.get_attribute("src")
+        return src
+
+    def click_external_product_image(self):
+        all_images = self.driver.find_elements(By.CSS_SELECTOR, HomeLocators.external_product_image)
+        all_images[0].click()
 
 
-
+    def click_product(self):
+        all_images = self.driver.find_elements(By.CSS_SELECTOR, HomeLocators.external_product_image)
+        first_image = all_images[0]
+        first_image.click()
 
     def click_search_bar_text_field(self):
         WebDriverWait(self.driver, 10).until(
@@ -182,6 +193,12 @@ class HomePage:
             if lst[i] < lst[i - 1]:
                 return False
         return True
+
+
+    def click_upload_product_btn(self):
+        add_product_btn = self.driver.find_element(By.CSS_SELECTOR, HomeLocators.upload_product_btn)
+        add_product_btn.click()
+
 
 
 

@@ -13,9 +13,10 @@ class HomeLocators:
     promotional_banner_second_image = '//*[@id="root"]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div[1]/div/div/div/ul/li[5]/a/img'
     banner = '//*[@id="root"]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div[1]/div/div/div/ul/li[8]/a'
     external_product_title = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[3]/a[5]/div/div[2]/div[2]/div[1]'
-    external_product_title = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[3]/a[3]/div/div[2]/div[2]/div[1]'
+    external_product_image = "div.img_img.product_image img"
     sort_btn = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[3]/div'
     sort_high_to_low = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[3]/div/select/option[3]'
     sort_low_to_high = '//*[@id="root"]/div/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[3]/div/select/option[2]'
     footer_importants_text = '//*[@id="root"]/div/div[2]/div[3]/div/div[1]/h2'
     connection_login_signup_btn = '//*[@id="root"]/div/div[2]/header/div/div/a[1]/span[1]'
+    upload_product_btn = "span.verticalMenu_AddProductBtn"
