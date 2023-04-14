@@ -1,4 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
+
+from utilities.db_utils import is_product_in_db
 from utilities.setup import WebDriverSetup
 import allure
 
