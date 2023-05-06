@@ -3,10 +3,10 @@ from urllib.parse import quote
 # from bson import ObjectId
 
 # Credentials
-password = "veHt1JK5"
+password = 
 encoded_password = quote(password)
-user_name = 'qa_agency'
-db_name = "trado_qa"
+user_name =
+db_name =
 
 # Function to create MongoDB connection
 def create_mongo_connection():
